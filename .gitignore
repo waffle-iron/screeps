@@ -9,3 +9,4 @@ node_modules
 
 # Screeps
 src/screeps-profiler.js
+dist
