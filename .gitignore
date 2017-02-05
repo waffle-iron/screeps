@@ -1,0 +1,11 @@
+# Dependency directories
+node_modules
+
+# Webstorm
+.idea
+
+# Atom
+.tern-project
+
+# Screeps
+src/screeps-profiler.js
