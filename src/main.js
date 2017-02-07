@@ -1,14 +1,14 @@
 // const watcher = require('watch-client.js');
-const queen = require('hivemind.queen');
-const clearMemory = require('helpers').clearMemory;
+const queen = require( 'hivemind.queen' );
+const clearMemory = require( 'helpers' ).clearMemory;
 
-const profiler = require('screeps-profiler');
+const profiler = require( 'screeps-profiler' );
 profiler.enable();
 
 module.exports.loop = function () {
-    profiler.wrap(function () {
-        clearMemory();
-        queen.run()
-        // watcher();
-    });
+  profiler.wrap( function () {
+    clearMemory();
+    queen.run();
+    // watcher();
+  } );
 };

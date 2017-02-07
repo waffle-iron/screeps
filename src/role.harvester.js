@@ -1,4 +1,4 @@
-let Base = require('roles.base');
+let Base = require('base.role');
 
 const HARVEST_STRUCTURES = [
     STRUCTURE_EXTENSION,
