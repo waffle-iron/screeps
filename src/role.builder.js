@@ -5,14 +5,15 @@ class Builder extends Base {
     if ( this.memory.building && this.carry.energy == 0 ) {
       this.memory.building = false;
       this.memory.task = 'harvesting';
-      this.say( '(b) harvesting' );
+      this.say( 'harvesting' );
     }
 
     if ( !this.memory.building && this.carry.energy == this.carryCapacity ) {
       this.memory.building = true;
-      this.say( '(b) building' );
+      this.say( 'building' );
     }
 
+    // TODO: Make this smarter: go to nearest contruction site
     if ( this.memory.building ) {
       let targets = this.room.find( FIND_CONSTRUCTION_SITES );
       if ( targets.length ) {
@@ -21,6 +22,7 @@ class Builder extends Base {
         }
       }
     } else {
+      // TODO: Find nearest source that is not occupied
       let sources = this.room.find( FIND_SOURCES );
       if ( this.harvest( sources[ 0 ] ) == ERR_NOT_IN_RANGE ) {
         this.moveTo( sources[ 0 ] );

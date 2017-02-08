@@ -3,6 +3,14 @@ let profiler = require( 'screeps-profiler' );
 class BaseRole extends Creep {
   constructor( creep ) {
     super( creep.id );
+    this.init();
+  }
+
+  init() {
+    if (!this.spawning && this.memory.notify_base) {
+      Game.spawns[this.memory.base].memory.spawning = false;
+      delete this.memory.notify_base;
+    }
   }
 
   role() {

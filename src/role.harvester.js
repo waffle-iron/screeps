@@ -1,6 +1,6 @@
 let Base = require( 'base.role' );
 
-const HARVEST_STRUCTURES = [
+const ENERGY_DESTINATIONS = [
     STRUCTURE_EXTENSION,
     STRUCTURE_SPAWN,
     STRUCTURE_TOWER,
@@ -8,6 +8,7 @@ const HARVEST_STRUCTURES = [
 
 class Harvester extends Base {
   run() {
+    // TODO: find nearest source that is not occupied
     if ( this.carry.energy < this.carryCapacity ) {
       let sources = this.room.find( FIND_SOURCES );
       if ( this.harvest( sources[ 0 ] ) == ERR_NOT_IN_RANGE ) {
@@ -15,9 +16,10 @@ class Harvester extends Base {
       }
     }
     else {
+      // TODO: Find nearest structures, or structures that really lack energy
       let targets = this.room.find( FIND_STRUCTURES, {
         filter: ( structure ) => {
-          return ( _.includes( HARVEST_STRUCTURES, structure.structureType ) ) && structure.energy < structure.energyCapacity;
+          return ( _.includes( ENERGY_DESTINATIONS, structure.structureType ) ) && structure.energy < structure.energyCapacity;
         }
       } );
       if ( targets.length > 0 ) {

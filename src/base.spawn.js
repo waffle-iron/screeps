@@ -1,17 +1,7 @@
 const randomNumber = require( 'helpers' ).randomNumber;
 
 const ROLES = require('hivemind.roles');
-const SPAWN_TIERS = {
-  // energyCapacityAvailable: spawn tier
-  300: 1,
-  550: 2,
-  800: 3,
-  1300: 4,
-  1800: 5,
-  2300: 6,
-  2800: 7,
-  3300: 8
-}
+const SPAWN_TIERS = require('config').SPAWN_TIERS;
 
 StructureSpawn.prototype.execute = function() {
   this.calculateTier();
@@ -34,18 +24,21 @@ StructureSpawn.prototype.manageProcreation = function() {
   for ( let role in ROLES ) {
     // TODO: Count creeps in another tick then the procreation code
     // TODO: Filter on creeps that have this spawn as base
-    let creeps = _.filter( Game.creeps, ( creep ) => creep.memory.role == role );
     let currentTier = this.memory.tier;
-    let min = ROLES[ role ].tier[currentTier].min;
-    let cost = ROLES[ role ].tier[currentTier].cost;
-    if ( creeps.length < min && this.energy >= cost) {
-      let name = `${role}-${randomNumber()}-${currentTier}`;
-        let result = this.createCreep(
-          ROLES[ role ].tier[currentTier].parts,
-          name,
-          { role }
-        );
-        console.log( `Spawning new ${role}: ${name}. Result: ${result}` );
+    if (ROLES[ role ].tier[currentTier]) { // Is this creep needed for this tier?
+      let creeps = _.filter( Game.creeps, ( creep ) => creep.memory.role == role );
+      let min = ROLES[ role ].tier[currentTier].min;
+      let cost = ROLES[ role ].tier[currentTier].cost;
+      if ( creeps.length < min && this.energy >= cost && !this.memory.spawning ) {
+        let name = `${role}-${randomNumber()}-${currentTier}`;
+          let result = this.createCreep(
+            ROLES[ role ].tier[currentTier].parts,
+            name,
+            { role: role, base: this.name, notify_base: true }
+          );
+          this.memory.spawning = true;
+          console.log( `${Game.time} - Spawning new ${role}: ${name}. Result: ${result}` );
+      }
     }
   }
 }
