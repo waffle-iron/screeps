@@ -10,8 +10,8 @@ StructureSpawn.prototype.execute = function() {
 
 StructureSpawn.prototype.calculateTier = function () {
   // Level of this spawn, ignoring RCL. Have a certain RCL tier doesn't mean the capacity is increased immediately.
-  // TODO: only check this when there's a chance the spawn was upgraded. Time will increase with every upgrade.
-  // TODO: if controller is downgraded, need to recheck tier immediately.
+  // TODO: Only check this when there's a chance the spawn was upgraded. Time will increase with every upgrade. id:0 +enhancement
+  // TODO: If controller is downgraded, need to recheck tier immediately. id:1 +enhancement gh:3
   for ( let amountNeeded in SPAWN_TIERS ) {
     if ( this.room.energyCapacityAvailable >= amountNeeded ) {
       this.memory.tier = SPAWN_TIERS[ amountNeeded ];
@@ -22,8 +22,8 @@ StructureSpawn.prototype.calculateTier = function () {
 
 StructureSpawn.prototype.manageProcreation = function() {
   for ( let role in ROLES ) {
-    // TODO: Count creeps in another tick then the procreation code
-    // TODO: Filter on creeps that have this spawn as base
+    // TODO: Count creeps in another tick than the procreation code id:2 +enhancement gh:1
+    // TODO: Filter on creeps that have this spawn as base id:3 +enhancement gh:2
     let currentTier = this.memory.tier;
     if (ROLES[ role ].tier[currentTier]) { // Is this creep needed for this tier?
       let creeps = _.filter( Game.creeps, ( creep ) => creep.memory.role == role );

@@ -8,7 +8,7 @@ const ENERGY_DESTINATIONS = [
 
 class Harvester extends Base {
   run() {
-    // TODO: find nearest source that is not occupied
+    // TODO: find nearest source that is not occupied id:8 +enhancement gh:8
     if ( this.carry.energy < this.carryCapacity ) {
       let sources = this.room.find( FIND_SOURCES );
       if ( this.harvest( sources[ 0 ] ) == ERR_NOT_IN_RANGE ) {
@@ -16,7 +16,7 @@ class Harvester extends Base {
       }
     }
     else {
-      // TODO: Find nearest structures, or structures that really lack energy
+      // TODO: Find nearest structures, or structures that really lack energy id:9 +enhancement gh:7
       let targets = this.room.find( FIND_STRUCTURES, {
         filter: ( structure ) => {
           return ( _.includes( ENERGY_DESTINATIONS, structure.structureType ) ) && structure.energy < structure.energyCapacity;

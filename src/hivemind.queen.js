@@ -2,7 +2,7 @@ const roles = require( 'hivemind.roles' );
 const BaseSpawn = require( 'base.spawn');
 
 class Queen {
-  // TODO: Only get creeps every few ticks. If a creep is killed, a task assigned to it will cause an error and that should trigger an immediate recount.
+  // TODO: Only get creeps every few ticks. If a creep is killed, a task assigned to it will cause an error and that should trigger an immediate recount. id:4
   creepsInventory() {
     if ( true ) {
       return Object.keys( Game.creeps ).map( creepName => {

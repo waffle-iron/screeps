@@ -1,4 +1,4 @@
-config = {};
+let config = {};
 
 config.SPAWN_TIERS = {
   // energyCapacityAvailable: spawn tier

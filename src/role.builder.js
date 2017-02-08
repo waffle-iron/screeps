@@ -13,7 +13,7 @@ class Builder extends Base {
       this.say( 'building' );
     }
 
-    // TODO: Make this smarter: go to nearest contruction site
+    // TODO: Make this smarter: go to nearest contruction site id:6 +enhancement gh:6
     if ( this.memory.building ) {
       let targets = this.room.find( FIND_CONSTRUCTION_SITES );
       if ( targets.length ) {
@@ -22,7 +22,7 @@ class Builder extends Base {
         }
       }
     } else {
-      // TODO: Find nearest source that is not occupied
+      // TODO: Find nearest source that is not occupied id:7 +enhancement gh:5
       let sources = this.room.find( FIND_SOURCES );
       if ( this.harvest( sources[ 0 ] ) == ERR_NOT_IN_RANGE ) {
         this.moveTo( sources[ 0 ] );
